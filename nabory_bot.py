@@ -25,14 +25,10 @@ app = Flask(__name__)
 def health_check():
     return "OK", 200
 
-def run_flask_app():
-    port = int(os.environ.get('PORT', 10000))
-    app.run(host='0.0.0.0', port=port)
-
 # --- Konfiguracja Selenium (headless) ---
 def get_selenium_driver():
     chrome_options = Options()
-    chrome_options.add_argument("--headless")  # bez interfejsu
+    chrome_options.add_argument("--headless")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--disable-gpu")
@@ -63,12 +59,11 @@ class NaboryBot:
         with open(self.seen_items_file, 'w', encoding='utf-8') as f:
             json.dump(list(self.seen_items), f, ensure_ascii=False, indent=2)
 
-    # --- NOWA: Metoda z Selenium ---
     def fetch_page_with_selenium(self, url):
         try:
             driver = get_selenium_driver()
             driver.get(url)
-            time.sleep(5)  # czekaj, aż JS się załaduje
+            time.sleep(5)
             html = driver.page_source
             driver.quit()
             return html
@@ -76,7 +71,6 @@ class NaboryBot:
             logging.error(f"Błąd Selenium pobierania {url}: {e}")
             return None
 
-    # --- Stara metoda z requests ---
     def fetch_page_with_requests(self, url):
         try:
             headers = {'User-Agent': 'Mozilla/5.0 (compatible; NaboryBot/1.0)'}
@@ -87,7 +81,6 @@ class NaboryBot:
             logging.error(f"Błąd pobierania {url}: {e}")
             return None
 
-    # --- Inteligentny wybór metody ---
     def fetch_page(self, url, use_selenium=False):
         if use_selenium:
             logging.info(f".Selenium: {url}")
@@ -139,7 +132,7 @@ class NaboryBot:
         url = target['url']
         selector = target['selector']
         base_url = target['base_url']
-        use_selenium = target.get('use_selenium', False)  # domyślnie False
+        use_selenium = target.get('use_selenium', False)
 
         logging.info(f"🔍 Sprawdzam: {name} ({url})")
         html = self.fetch_page(url, use_selenium)
@@ -169,19 +162,26 @@ class NaboryBot:
 
         while True:
             for target in self.config['targets']:
-                self.check_target(target)
+                try:
+                    self.check_target(target)
+                except Exception as e:
+                    logging.error(f"Błąd podczas sprawdzania {target['name']}: {e}")
             self.save_seen_items()
             minutes = self.config['check_interval_minutes']
             logging.info(f"😴 Czekam {minutes} minut do kolejnego sprawdzenia...")
             time.sleep(minutes * 60)
 
-# --- Uruchomienie bota i serwera równolegle ---
-if __name__ == "__main__":
-    # Uruchom serwer Flask w tle
-    flask_thread = Thread(target=run_flask_app)
-    flask_thread.daemon = True
-    flask_thread.start()
-
-    # Uruchom główną pętlę bota
+# --- URUCHOMIENIE: Flask w głównym wątku, Bot w tle ---
+def start_bot():
     bot = NaboryBot()
     bot.run()
+
+if __name__ == "__main__":
+    # Uruchom bota w tle
+    bot_thread = Thread(target=start_bot)
+    bot_thread.daemon = True
+    bot_thread.start()
+
+    # Uruchom Flask w głównym wątku — Render czeka na to!
+    port = int(os.environ.get('PORT', 10000))
+    app.run(host='0.0.0.0', port=port)
