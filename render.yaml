@@ -7,5 +7,6 @@ services:
     startCommand: "python nabory_bot.py"
     envVars:
       - key: PYTHON_VERSION
-        value: 3.10
+        value: 3.10.12
     healthCheckPath: /health
+
