@@ -4,9 +4,9 @@
     "enabled": true,
     "smtp_server": "smtp.gmail.com",
     "smtp_port": 587,
-    "sender_email": "TWÓJ_EMAIL@GMAIL.COM",
-    "sender_password": "HASŁO_APLIKACJI",
-    "recipient_email": "TWÓJ_EMAIL@GMAIL.COM"
+    "sender_email": "estanustka@GMAIL.COM",
+    "sender_password": "tgcq txlq snst qgsy",
+    "recipient_email": "estanustka@gmail.com"
   },
   "telegram": {
     "enabled": false,
@@ -185,3 +185,4 @@
     }
   ]
 }
+
