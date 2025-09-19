@@ -9,12 +9,16 @@ import os
 import logging
 from urllib.parse import urljoin
 from threading import Thread
-from flask import Flask  # <-- NOWE: dodajemy Flask
+from flask import Flask
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 # Konfiguracja logowania
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# --- NOWE: Mikroserwer Flask dla Render Health Check ---
+# --- Mikroserwer Flask dla Render Health Check ---
 app = Flask(__name__)
 
 @app.route('/health')
@@ -22,11 +26,22 @@ def health_check():
     return "OK", 200
 
 def run_flask_app():
-    # Render wymaga, żeby serwer słuchał na porcie z ENV
     port = int(os.environ.get('PORT', 10000))
     app.run(host='0.0.0.0', port=port)
 
-# --- KONIEC NOWEJ CZĘŚCI ---
+# --- Konfiguracja Selenium (headless) ---
+def get_selenium_driver():
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # bez interfejsu
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--window-size=1920,1080")
+    chrome_options.add_argument("user-agent=Mozilla/5.0 (compatible; NaboryBot/1.0)")
+
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    return driver
 
 class NaboryBot:
     def __init__(self, config_path='config.json'):
@@ -48,7 +63,21 @@ class NaboryBot:
         with open(self.seen_items_file, 'w', encoding='utf-8') as f:
             json.dump(list(self.seen_items), f, ensure_ascii=False, indent=2)
 
-    def fetch_page(self, url):
+    # --- NOWA: Metoda z Selenium ---
+    def fetch_page_with_selenium(self, url):
+        try:
+            driver = get_selenium_driver()
+            driver.get(url)
+            time.sleep(5)  # czekaj, aż JS się załaduje
+            html = driver.page_source
+            driver.quit()
+            return html
+        except Exception as e:
+            logging.error(f"Błąd Selenium pobierania {url}: {e}")
+            return None
+
+    # --- Stara metoda z requests ---
+    def fetch_page_with_requests(self, url):
         try:
             headers = {'User-Agent': 'Mozilla/5.0 (compatible; NaboryBot/1.0)'}
             response = requests.get(url, headers=headers, timeout=15)
@@ -57,6 +86,15 @@ class NaboryBot:
         except Exception as e:
             logging.error(f"Błąd pobierania {url}: {e}")
             return None
+
+    # --- Inteligentny wybór metody ---
+    def fetch_page(self, url, use_selenium=False):
+        if use_selenium:
+            logging.info(f".Selenium: {url}")
+            return self.fetch_page_with_selenium(url)
+        else:
+            logging.info(f"..Requests: {url}")
+            return self.fetch_page_with_requests(url)
 
     def extract_items(self, html, selector, base_url):
         if not html:
@@ -97,12 +135,18 @@ class NaboryBot:
             logging.error(f"Błąd wysyłania e-maila: {e}")
 
     def check_target(self, target):
-        logging.info(f"🔍 Sprawdzam: {target['name']} ({target['url']})")
-        html = self.fetch_page(target['url'])
+        name = target['name']
+        url = target['url']
+        selector = target['selector']
+        base_url = target['base_url']
+        use_selenium = target.get('use_selenium', False)  # domyślnie False
+
+        logging.info(f"🔍 Sprawdzam: {name} ({url})")
+        html = self.fetch_page(url, use_selenium)
         if not html:
             return
 
-        items = self.extract_items(html, target['selector'], target['base_url'])
+        items = self.extract_items(html, selector, base_url)
         new_items = []
 
         for item in items:
@@ -111,13 +155,13 @@ class NaboryBot:
                 new_items.append(item)
 
         if new_items:
-            subject = f"🚨 NOWY NABÓR: {target['name']} ({len(new_items)} nowych)"
+            subject = f"🚨 NOWY NABÓR: {name} ({len(new_items)} nowych)"
             body = f"<h3>{subject}</h3><ul>"
             for item in new_items:
                 body += f"<li><a href='{item['url']}'>{item['title']}</a></li>"
             body += "</ul>"
             self.send_email(subject, body)
-            logging.info(f"🎉 Znaleziono {len(new_items)} nowych naborów w {target['name']}")
+            logging.info(f"🎉 Znaleziono {len(new_items)} nowych naborów w {name}")
 
     def run(self):
         logging.info("🚀 Bot startuje...")
