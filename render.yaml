@@ -1,5 +1,5 @@
 services:
-  - type: worker
+  - type: web
     name: nabory-bot
     env: python
     plan: free
@@ -8,3 +8,4 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.10
+    healthCheckPath: /health
