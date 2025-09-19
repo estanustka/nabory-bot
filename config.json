@@ -14,176 +14,353 @@
     "chat_id": ""
   },
   "targets": [
+
+    // =============================
+    // ✅ GŁÓWNE OPERATORY (Z NABORAMI)
+    // =============================
+
     {
       "name": "ARR Konin (Usługi rozwojowe)",
       "url": "https://arrkonin.org.pl/oferta/uslugi-rozwojowe/",
-      "selector": "h3, .project-box h4, .nabor-status",
+      "selector": "h3, .project-box h4, .nabor-status, p strong",
       "base_url": "https://arrkonin.org.pl",
       "note": "✅ Świetne źródło – pokazuje status naboru (otwarty/zamknięty)"
     },
     {
-  "name": "HRP Grants (Projekty aktualne)",
-  "url": "https://hrpgrants.com.pl/projekty/#projekty-aktualne",
-  "selector": "h3.project-title, .project-box h4, .status-badge",
-  "base_url": "https://hrpgrants.com.pl",
-  "use_selenium": true
-},
+      "name": "HRP Grants (Projekty aktualne)",
+      "url": "https://hrpgrants.com.pl/projekty/#projekty-aktualne",
+      "selector": "h3.project-title, .project-box h4, .status-badge, .project-item h3",
+      "base_url": "https://hrpgrants.com.pl",
+      "use_selenium": true,
+      "note": "⚠️ WYMAGA SELENIUM – SPA, treści ładowane przez JavaScript"
+    },
     {
       "name": "KARR.pl (Aktualne)",
       "url": "https://karr.pl/aktualne/",
-      "selector": "h2, h3, .news-title, .project-item h3",
+      "selector": "h2, h3, .news-title, .project-item h3, .post-title",
       "base_url": "https://karr.pl",
       "note": "✅ Idealne – sekcja 'Aktualne' zawiera najnowsze informacje o naborach"
     },
     {
       "name": "Integron Plus (Aktualności)",
       "url": "https://integronplus.pl/aktualnosci/",
-      "selector": "h2, h3, .post-title, .news-item h3",
+      "selector": "h2, h3, .post-title, .news-item h3, .entry-title",
       "base_url": "https://integronplus.pl",
       "note": "✅ Świetne źródło – często ogłaszają nowe szkolenia i nabory (np. 'e-Obyw@tel', 'Cyfrowy nauczyciel')"
     },
     {
-  "name": "SZIH.pl (Projekty w realizacji)",
-  "url": "https://szih.pl/projekty-w-realizacji/",
-  "selector": "h2, h3, .project-title, .content-section h3",
-  "base_url": "https://szih.pl",
-  "use_selenium": true
-},
+      "name": "SZIH.pl (Projekty w realizacji)",
+      "url": "https://szih.pl/projekty-w-realizacji/",
+      "selector": "h2, h3, .project-title, .content-section h3, .projekt-nazwa",
+      "base_url": "https://szih.pl",
+      "use_selenium": true,
+      "note": "⚠️ MOŻE WYMAGAĆ SELENIUM – sprawdź, czy selektor działa. Jeśli nie – użyj Selenium."
+    },
     {
-  "name": "MARR.pl (Projekty: Doradztwo i szkolenia)",
-  "url": "https://marr.pl/projekty/?e-filter-2e65027-kategorie_projekty=doradztwo-i-szkolenia",
-  "selector": "h3, .project-title, .filter-item h3",
-  "base_url": "https://marr.pl",
-  "use_selenium": true
-},
+      "name": "MARR.pl (Projekty: Doradztwo i szkolenia)",
+      "url": "https://marr.pl/projekty/?e-filter-2e65027-kategorie_projekty=doradztwo-i-szkolenia",
+      "selector": "h3, .project-title, .filter-item h3, .projekt-tytul",
+      "base_url": "https://marr.pl",
+      "use_selenium": true,
+      "note": "⚠️ WYMAGA SELENIUM – filtry i lista projektów generowane przez JavaScript"
+    },
     {
       "name": "RIG Katowice (Nasze projekty)",
       "url": "https://rig.katowice.pl/nasze-projekty/",
-      "selector": "h2, h3, .project-box h3, .project-title",
+      "selector": "h2, h3, .project-box h3, .project-title, .projekt-nazwa",
       "base_url": "https://rig.katowice.pl",
       "note": "✅ Dobre źródło – lista aktualnych projektów i naborów"
     },
+
+    // =============================
+    // 🔄 OPERATORZY Z LISTY – ZAKTUALIZOWANE URL-E
+    // =============================
+
     {
       "name": "WUP Kielce (BUR)",
       "url": "https://wupkielce.praca.gov.pl/baza-uslug-rozwojowych",
-      "selector": "h2, h3, p strong, .content-section h3",
+      "selector": "h2, h3, p strong, .content-section h3, .bur-item h3",
       "base_url": "https://wupkielce.praca.gov.pl"
     },
     {
       "name": "Stawil.pl",
       "url": "https://www.stawil.pl/",
-      "selector": "h2.title, h3, .offer-box h4, .training-name",
+      "selector": "h2.title, h3, .offer-box h4, .training-name, .szkolenie-tytul",
       "base_url": "https://www.stawil.pl"
     },
     {
       "name": "Postawnasiebie.edu.pl",
       "url": "https://postawnasiebie.edu.pl/",
-      "selector": "h2, h3, .service-title, p strong",
+      "selector": "h2, h3, .service-title, p strong, .szkolenie-opis",
       "base_url": "https://postawnasiebie.edu.pl"
     },
     {
       "name": "TARR.org.pl (Regionalny Fundusz Szkoleniowy II)",
       "url": "https://www.tarr.org.pl/project/regionalny-fundusz-szkoleniowy-ii",
-      "selector": "h1, h2, h3, .project-header, .content p strong",
+      "selector": "h1, h2, h3, .project-header, .content p strong, .projekt-status",
       "base_url": "https://www.tarr.org.pl"
     },
     {
       "name": "ZARR.com.pl (III kwartał 2024)",
       "url": "https://uslugirozwojowe3.zarr.com.pl/nabor-do-udzialu-w-projekcie-alokacja-na-iii-kwartal-2024/",
-      "selector": "h1, h2, h3, .page-title, .content-section p",
+      "selector": "h1, h2, h3, .page-title, .content-section p, .nabor-info",
       "base_url": "https://uslugirozwojowe3.zarr.com.pl"
     },
     {
       "name": "Fundusze UE Lubelskie",
       "url": "https://funduszeue.lubelskie.pl/",
-      "selector": "h3 a, .news-title a, .project-box h4",
+      "selector": "h3 a, .news-title a, .project-box h4, .projekt-link",
       "base_url": "https://funduszeue.lubelskie.pl"
     },
     {
       "name": "BONY2.mojszeftoja.pl",
       "url": "https://bony2.mojszeftoja.pl/",
-      "selector": "h2, h3, .offer-title, .news-item h3",
+      "selector": "h2, h3, .offer-title, .news-item h3, .bon-info",
       "base_url": "https://bony2.mojszeftoja.pl"
     },
     {
       "name": "FRRR (TBR)",
       "url": "https://frrr.pl/projekty/tbr.html",
-      "selector": "h3, h4, .project-name, table tr td",
+      "selector": "h3, h4, .project-name, table tr td, .tbr-item",
       "base_url": "https://frrr.pl"
     },
     {
       "name": "OCRG Opolskie (Działanie 5.11)",
       "url": "https://ocrg.opolskie.pl/dzialanie-5-11-opolskie-ksztalcenie-ustawiczne/",
-      "selector": "h1, h2, .page-header, .content p",
+      "selector": "h1, h2, .page-header, .content p, .szkolenie-opis",
       "base_url": "https://ocrg.opolskie.pl"
     },
     {
       "name": "WUP Warszawa",
       "url": "https://www.wupwarszawa.praca.gov.pl",
-      "selector": "h3 a, .news-list a, .bur-announcement h3",
+      "selector": "h3 a, .news-list a, .bur-announcement h3, .aktualnosci-tytul",
       "base_url": "https://www.wupwarszawa.praca.gov.pl"
     },
     {
       "name": "WARR",
       "url": "https://www.warr.pl",
-      "selector": "h2 a, .project-title a, .news-item h3",
+      "selector": "h2 a, .project-title a, .news-item h3, .projekt-nazwa",
       "base_url": "https://www.warr.pl"
     },
     {
       "name": "ARR Częstochowa (PSF7)",
       "url": "https://www.arr.czestochowa.pl/projekty/aktualne/psf7-uslugi-rozwojowe-dla-przedsiebiorcow-i-pracownikow-z-wojewodztwa-slaskiego",
-      "selector": "h2, h3, .project-header, .content p strong",
+      "selector": "h2, h3, .project-header, .content p strong, .nabor-status",
       "base_url": "https://www.arr.czestochowa.pl"
     },
     {
       "name": "InkubatorEU.pl (Kadry Przyszłości)",
       "url": "https://www.inkubatoreu.pl/kadry-przyszlosci-uslugi-rozwojowe-dla-przedsiebiorcow-psf",
-      "selector": "h1, h2, .page-title, .offer-box h3",
+      "selector": "h1, h2, .page-title, .offer-box h3, .szkolenie-tytul",
       "base_url": "https://www.inkubatoreu.pl"
     },
     {
       "name": "OperacjaEdukacja.pl",
       "url": "https://www.operacjaedukacja.pl",
-      "selector": "h2, h3, .training-title, .offer-item h3",
+      "selector": "h2, h3, .training-title, .offer-item h3, .szkolenie-nazwa",
       "base_url": "https://www.operacjaedukacja.pl"
     },
     {
       "name": "Akademia.Lootus.pl",
       "url": "https://www.akademia.lootus.pl",
-      "selector": "h2 a, .course-name a, .event-title",
+      "selector": "h2 a, .course-name a, .event-title, .szkolenie-link",
       "base_url": "https://www.akademia.lootus.pl"
     },
     {
       "name": "Bon2.LARR.pl",
       "url": "https://bon2.larr.pl/",
-      "selector": "h2, h3, .bon-title, .news-item h3",
+      "selector": "h2, h3, .bon-title, .news-item h3, .nabor-info",
       "base_url": "https://bon2.larr.pl"
     },
     {
       "name": "WARP.org.pl (Usługi rozwojowe)",
       "url": "https://warp.org.pl/dotacje/przedsiebiorca/uslugi-rozwojowe-dla-twojego-biznesu/",
-      "selector": "h2, h3, .service-title, .dotacje-box h3",
+      "selector": "h2, h3, .service-title, .dotacje-box h3, .projekt-opis",
       "base_url": "https://warp.org.pl"
     },
     {
       "name": "MARR.com.pl (BUR)",
       "url": "https://www.marr.com.pl/BUR_2.html",
-      "selector": "h2, h3, .bur-section h3, .content p strong",
+      "selector": "h2, h3, .bur-section h3, .content p strong, .nabor-status",
       "base_url": "https://www.marr.com.pl"
     },
     {
       "name": "SSE Łódź",
       "url": "https://sse.lodz.pl/",
-      "selector": "h2 a, .project-title a, .news-item h3",
+      "selector": "h2 a, .project-title a, .news-item h3, .projekt-link",
       "base_url": "https://sse.lodz.pl"
     },
     {
       "name": "Małopolska.pl (BUR)",
       "url": "https://www.malopolska.pl",
-      "selector": "h3 a, .news-title a, .project-link",
+      "selector": "h3 a, .news-title a, .project-link, .bur-aktualnosci",
       "base_url": "https://www.malopolska.pl"
+    },
+
+    // =============================
+    // 🔄 DODANI BRACI OPERATORZY (z podmienionymi URL-ami)
+    // =============================
+
+    {
+      "name": "CARITAS Rzeszów (Szkolenia)",
+      "url": "https://www.szkolenia.caritas.rzeszow.pl",
+      "selector": "h2, h3, .szkolenie-tytul, .course-title, .offer-box h3",
+      "base_url": "https://www.szkolenia.caritas.rzeszow.pl",
+      "use_selenium": true,
+      "note": "⚠️ MOŻE WYMAGAĆ SELENIUM – strona wygląda na SPA"
+    },
+    {
+      "name": "PFP.com.pl (Aktualności)",
+      "url": "https://www.pfp.com.pl/aktualnosci/",
+      "selector": "h2, h3, .news-title, .post-title, .aktualnosc-nazwa",
+      "base_url": "https://www.pfp.com.pl"
+    },
+    {
+      "name": "DPIN.pl (Projekty)",
+      "url": "https://dpin.pl/projekty/",
+      "selector": "h2, h3, .project-title, .offer-box h3, .projekt-nazwa",
+      "base_url": "https://dpin.pl"
+    },
+    {
+      "name": "KDKinfo.pl (Aktualności)",
+      "url": "https://kdkinfo.pl/aktualnosci/",
+      "selector": "h2, h3, .news-title, .post-title, .aktualnosc-tytul",
+      "base_url": "https://kdkinfo.pl"
+    },
+    {
+      "name": "CTS.com.pl (Szkolenia)",
+      "url": "https://cts.com.pl/szkolenia/",
+      "selector": "h2, h3, .course-title, .training-box h3, .szkolenie-nazwa",
+      "base_url": "https://cts.com.pl"
+    },
+    {
+      "name": "Processteam.pl (Aktualności)",
+      "url": "https://processteam.pl/aktualnosci/",
+      "selector": "h2, h3, .post-title, .news-item h3, .aktualnosc-tytul",
+      "base_url": "https://processteam.pl"
+    },
+    {
+      "name": "Adnakademia.pl (Projekty)",
+      "url": "https://www.adnakademia.pl/projekty/",
+      "selector": "h2, h3, .project-title, .offer-box h3, .projekt-nazwa",
+      "base_url": "https://www.adnakademia.pl"
+    },
+    {
+      "name": "OCWP.org.pl (Aktualności)",
+      "url": "https://ocwp.org.pl/aktualnosci/",
+      "selector": "h2, h3, .post-title, .news-item h3, .aktualnosc-tytul",
+      "base_url": "https://ocwp.org.pl"
+    },
+    {
+      "name": "WIPH.pl (Aktualności)",
+      "url": "https://wiph.pl/aktualnosci/",
+      "selector": "h2, h3, .post-title, .news-item h3, .aktualnosc-tytul",
+      "base_url": "https://wiph.pl"
+    },
+    {
+      "name": "KARRSA.eu (Aktualności)",
+      "url": "https://karrsa.eu/aktualnosci/",
+      "selector": "h2, h3, .post-title, .news-item h3, .aktualnosc-tytul",
+      "base_url": "https://karrsa.eu"
+    },
+    {
+      "name": "QSZurich.pl (News)",
+      "url": "https://www.qszurich.pl/news/",
+      "selector": "h2, h3, .news-title, .post-title, .aktualnosc-nazwa",
+      "base_url": "https://www.qszurich.pl"
+    },
+    {
+      "name": "KIG.pl (Aktualności)",
+      "url": "https://kig.pl/aktualnosci/",
+      "selector": "h2, h3, .post-title, .news-item h3, .aktualnosc-tytul",
+      "base_url": "https://kig.pl"
+    },
+    {
+      "name": "TechPal.com.pl (Projekty)",
+      "url": "http://techpal.com.pl/projekty/",
+      "selector": "h2, h3, .project-title, .offer-box h3, .projekt-nazwa",
+      "base_url": "http://techpal.com.pl"
+    },
+    {
+      "name": "Inspire-Consulting.pl (Aktualności)",
+      "url": "https://inspire-consulting.pl/pl/aktualnosci/",
+      "selector": "h2, h3, .post-title, .news-item h3, .aktualnosc-tytul",
+      "base_url": "https://inspire-consulting.pl"
+    },
+    {
+      "name": "Podregion Leszczyński (Aktualności)",
+      "url": "https://www.podregionleszczynski.pl/aktualnosci/",
+      "selector": "h2, h3, .news-title, .post-title, .aktualnosc-nazwa",
+      "base_url": "https://www.podregionleszczynski.pl"
+    },
+    {
+      "name": "Rozwijamy.eu (Aktualności)",
+      "url": "https://www.rozwijamy.eu/aktualnosci/",
+      "selector": "h2, h3, .post-title, .news-item h3, .aktualnosc-tytul",
+      "base_url": "https://www.rozwijamy.eu"
+    },
+    {
+      "name": "Agroreg.com.pl (Aktualności)",
+      "url": "https://www.agroreg.com.pl/aktualnosci/",
+      "selector": "h2, h3, .post-title, .news-item h3, .aktualnosc-nazwa",
+      "base_url": "https://www.agroreg.com.pl"
+    },
+    {
+      "name": "DAWG.pl (Aktualności)",
+      "url": "https://dawg.pl/aktualnosci/",
+      "selector": "h2, h3, .post-title, .news-item h3, .aktualnosc-tytul",
+      "base_url": "https://dawg.pl"
+    },
+    {
+      "name": "ARLEG.eu (Projekty)",
+      "url": "https://www.arleg.eu/projekty/",
+      "selector": "h2, h3, .project-title, .content-section h3, .projekt-nazwa",
+      "base_url": "https://www.arleg.eu"
+    },
+    {
+      "name": "FGSA.pl (Aktualności)",
+      "url": "https://www.fgsa.pl/aktualnosci/",
+      "selector": "h2, h3, .post-title, .news-item h3, .aktualnosc-tytul",
+      "base_url": "https://www.fgsa.pl"
+    },
+    {
+      "name": "Burszansa.pl (Aktualności)",
+      "url": "https://burszansa.pl/aktualnosci/",
+      "selector": "h2 a, h3 a, .news-title a, .post-title",
+      "base_url": "https://burszansa.pl"
+    },
+    {
+      "name": "PARP (BUR Kuj-Pom)",
+      "url": "https://www.parp.gov.pl/aktualnosci/bur",
+      "selector": "h3 a, .article-title a, .news-item h3, .bur-aktualnosc",
+      "base_url": "https://www.parp.gov.pl"
+    },
+
+    // =============================
+    // ⚠️ OPERATORZY DO UWAGI / POMINIĘCI
+    // =============================
+
+    {
+      "name": "PBUR BCP.org.pl",
+      "url": "https://pbur.bcp.org.pl/",
+      "selector": "h2, h3",
+      "base_url": "https://pbur.bcp.org.pl",
+      "note": "⚠️ WYMAGA LOGOWANIA – pominięte, bo bot nie może się zalogować bez danych"
+    },
+    {
+      "name": "Fundusz Usług Rozwojowych 2 (PARR)",
+      "url": "https://www.funduszuslugrozwojowych2.parr.pl",
+      "selector": "h2, h3",
+      "base_url": "https://www.funduszuslugrozwojowych2.parr.pl",
+      "note": "⚠️ Strona może nie istnieć lub być nieaktywna – sprawdź dostępność"
+    },
+    {
+      "name": "Sagitum.pl (Firma IT)",
+      "url": "https://sagitum.pl/",
+      "selector": "h2, h3",
+      "base_url": "https://sagitum.pl",
+      "note": "❌ USUNIĘTE – to firma IT, nie ogłasza naborów na szkolenia BUR"
     }
+
   ]
 }
-
-
