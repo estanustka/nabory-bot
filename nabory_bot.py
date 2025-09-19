@@ -8,9 +8,25 @@ from email.mime.multipart import MIMEMultipart
 import os
 import logging
 from urllib.parse import urljoin
+from threading import Thread
+from flask import Flask  # <-- NOWE: dodajemy Flask
 
 # Konfiguracja logowania
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# --- NOWE: Mikroserwer Flask dla Render Health Check ---
+app = Flask(__name__)
+
+@app.route('/health')
+def health_check():
+    return "OK", 200
+
+def run_flask_app():
+    # Render wymaga, żeby serwer słuchał na porcie z ENV
+    port = int(os.environ.get('PORT', 10000))
+    app.run(host='0.0.0.0', port=port)
+
+# --- KONIEC NOWEJ CZĘŚCI ---
 
 class NaboryBot:
     def __init__(self, config_path='config.json'):
@@ -115,6 +131,13 @@ class NaboryBot:
             logging.info(f"😴 Czekam {minutes} minut do kolejnego sprawdzenia...")
             time.sleep(minutes * 60)
 
+# --- Uruchomienie bota i serwera równolegle ---
 if __name__ == "__main__":
+    # Uruchom serwer Flask w tle
+    flask_thread = Thread(target=run_flask_app)
+    flask_thread.daemon = True
+    flask_thread.start()
+
+    # Uruchom główną pętlę bota
     bot = NaboryBot()
     bot.run()
