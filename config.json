@@ -4,9 +4,9 @@
     "enabled": true,
     "smtp_server": "smtp.gmail.com",
     "smtp_port": 587,
-    "sender_email": "estanustka@GMAIL.COM",
-    "sender_password": "tgcq txlq snst qgsy",
-    "recipient_email": "estanustka@gmail.com"
+    "sender_email": "TWÓJ_EMAIL@GMAIL.COM",
+    "sender_password": "HASŁO_APLIKACJI",
+    "recipient_email": "TWÓJ_EMAIL@GMAIL.COM"
   },
   "telegram": {
     "enabled": false,
@@ -14,11 +14,6 @@
     "chat_id": ""
   },
   "targets": [
-
-    // =============================
-    // ✅ GŁÓWNE OPERATORY (Z NABORAMI)
-    // =============================
-
     {
       "name": "ARR Konin (Usługi rozwojowe)",
       "url": "https://arrkonin.org.pl/oferta/uslugi-rozwojowe/",
@@ -71,11 +66,6 @@
       "base_url": "https://rig.katowice.pl",
       "note": "✅ Dobre źródło – lista aktualnych projektów i naborów"
     },
-
-    // =============================
-    // 🔄 OPERATORZY Z LISTY – ZAKTUALIZOWANE URL-E
-    // =============================
-
     {
       "name": "WUP Kielce (BUR)",
       "url": "https://wupkielce.praca.gov.pl/baza-uslug-rozwojowych",
@@ -196,11 +186,6 @@
       "selector": "h3 a, .news-title a, .project-link, .bur-aktualnosci",
       "base_url": "https://www.malopolska.pl"
     },
-
-    // =============================
-    // 🔄 DODANI BRACI OPERATORZY (z podmienionymi URL-ami)
-    // =============================
-
     {
       "name": "CARITAS Rzeszów (Szkolenia)",
       "url": "https://www.szkolenia.caritas.rzeszow.pl",
@@ -335,11 +320,6 @@
       "selector": "h3 a, .article-title a, .news-item h3, .bur-aktualnosc",
       "base_url": "https://www.parp.gov.pl"
     },
-
-    // =============================
-    // ⚠️ OPERATORZY DO UWAGI / POMINIĘCI
-    // =============================
-
     {
       "name": "PBUR BCP.org.pl",
       "url": "https://pbur.bcp.org.pl/",
@@ -361,6 +341,5 @@
       "base_url": "https://sagitum.pl",
       "note": "❌ USUNIĘTE – to firma IT, nie ogłasza naborów na szkolenia BUR"
     }
-
   ]
 }
