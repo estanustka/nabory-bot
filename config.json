@@ -22,12 +22,12 @@
       "note": "✅ Świetne źródło – pokazuje status naboru (otwarty/zamknięty)"
     },
     {
-      "name": "HRP Grants (Projekty aktualne)",
-      "url": "https://hrpgrants.com.pl/projekty/#projekty-aktualne",
-      "selector": "h3.project-title, .project-box h4, .status-badge",
-      "base_url": "https://hrpgrants.com.pl",
-      "note": "⚠️ WYMAGA SELENIUM – strona Single Page Application (SPA), treści ładowane przez JavaScript"
-    },
+  "name": "HRP Grants (Projekty aktualne)",
+  "url": "https://hrpgrants.com.pl/projekty/#projekty-aktualne",
+  "selector": "h3.project-title, .project-box h4, .status-badge",
+  "base_url": "https://hrpgrants.com.pl",
+  "use_selenium": true
+},
     {
       "name": "KARR.pl (Aktualne)",
       "url": "https://karr.pl/aktualne/",
@@ -43,19 +43,19 @@
       "note": "✅ Świetne źródło – często ogłaszają nowe szkolenia i nabory (np. 'e-Obyw@tel', 'Cyfrowy nauczyciel')"
     },
     {
-      "name": "SZIH.pl (Projekty w realizacji)",
-      "url": "https://szih.pl/projekty-w-realizacji/",
-      "selector": "h2, h3, .project-title, .content-section h3",
-      "base_url": "https://szih.pl",
-      "note": "⚠️ MOŻE WYMAGAĆ SELENIUM – sprawdź, czy selektor działa. Jeśli nie – użyj Selenium."
-    },
+  "name": "SZIH.pl (Projekty w realizacji)",
+  "url": "https://szih.pl/projekty-w-realizacji/",
+  "selector": "h2, h3, .project-title, .content-section h3",
+  "base_url": "https://szih.pl",
+  "use_selenium": true
+},
     {
-      "name": "MARR.pl (Projekty: Doradztwo i szkolenia)",
-      "url": "https://marr.pl/projekty/?e-filter-2e65027-kategorie_projekty=doradztwo-i-szkolenia",
-      "selector": "h3, .project-title, .filter-item h3",
-      "base_url": "https://marr.pl",
-      "note": "⚠️ WYMAGA SELENIUM – filtry i lista projektów generowane przez JavaScript"
-    },
+  "name": "MARR.pl (Projekty: Doradztwo i szkolenia)",
+  "url": "https://marr.pl/projekty/?e-filter-2e65027-kategorie_projekty=doradztwo-i-szkolenia",
+  "selector": "h3, .project-title, .filter-item h3",
+  "base_url": "https://marr.pl",
+  "use_selenium": true
+},
     {
       "name": "RIG Katowice (Nasze projekty)",
       "url": "https://rig.katowice.pl/nasze-projekty/",
@@ -185,4 +185,5 @@
     }
   ]
 }
+
 
